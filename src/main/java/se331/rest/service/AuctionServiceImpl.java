@@ -32,7 +32,11 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
+    @Transactional
     public AuctionItem save(AuctionItem auctionItem) {
+//        Bid bid = bidDao.findById(auctionItem.getSuccessfulBid().getId()).orElse(null);
+//        auctionItem.setSuccessfulBid(bid);
+//                bid.setItem(auctionItem);
         return auctionDao.save(auctionItem);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +17,13 @@ import se331.rest.util.LabMapper;
 
 import java.util.List;
 
+@Controller
 public class AuctionController {
     @Autowired
     AuctionService auctionService;
 
     @GetMapping("auction")
-    public ResponseEntity<?> getEventLists(@RequestParam(value = "_limit", required = false) Integer perPage
+    public ResponseEntity<?> getAuctionLists(@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page) {
         Page<AuctionItem> pageOutput = auctionService.getAuctions(perPage,page);
         HttpHeaders responseHeader = new HttpHeaders();
@@ -31,7 +33,7 @@ public class AuctionController {
     }
 
     @GetMapping("auction/{id}")
-    public ResponseEntity<?> getEvent(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getAuction(@PathVariable("id") Long id) {
         AuctionItem output = auctionService.getAuction(id);
         if (output != null) {
             return ResponseEntity.ok(LabMapper.INSTANCE.getAuctionDto(output));
