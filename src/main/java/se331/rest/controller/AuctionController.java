@@ -24,8 +24,18 @@ public class AuctionController {
 
     @GetMapping("auction")
     public ResponseEntity<?> getAuctionLists(@RequestParam(value = "_limit", required = false) Integer perPage
-            , @RequestParam(value = "_page", required = false) Integer page) {
-        Page<AuctionItem> pageOutput = auctionService.getAuctions(perPage,page);
+            , @RequestParam(value = "_page", required = false) Integer page,@RequestParam(value = "description",required = false)String description,@RequestParam(value = "value",required = false)Integer successfulBid) {
+        perPage = perPage == null?3:perPage;
+        page = page ==null?1:page;
+        Page<AuctionItem> pageOutput;
+
+        if(description != null){
+            pageOutput = auctionService.getAuctions(description, PageRequest.of(page-1,perPage));
+        } else if (successfulBid != null) {
+            pageOutput = auctionService.getAuctions(successfulBid, PageRequest.of(page-1,perPage));
+        } else {
+            pageOutput = auctionService.getAuctions(perPage,page);
+        }
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count",String.valueOf(pageOutput.getTotalElements()));
         return new
