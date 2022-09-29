@@ -14,5 +14,4 @@ public class BidDTO {
     Long id;
     Integer amount;
     LocalDateTime dateTime;
-    AuctionItem item;
 }
