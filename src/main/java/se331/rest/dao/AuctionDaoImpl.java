@@ -31,14 +31,11 @@ public class AuctionDaoImpl implements  AuctionDao{
     }
 
     @Override
-    public Page<AuctionItem> getAuction(String description, Pageable page) {
-        return auctionRepository.findByDescriptionContainingIgnoreCase(description,page);
+    public Page<AuctionItem> getAuction(String description,Integer successfulBid, Pageable page) {
+        return auctionRepository.findByDescriptionContainingIgnoreCaseOrSuccessfulBidAmountLessThan(description,successfulBid,page);
     }
 
-    @Override
-    public Page<AuctionItem> getAuction(Integer value, Pageable page) {
-        return auctionRepository.findBySuccessfulBidAmountLessThan(value,page);
-    }
+
 
     @Override
     public AuctionItem save(AuctionItem auctionItem) {

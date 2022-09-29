@@ -29,12 +29,10 @@ public class AuctionController {
         page = page ==null?1:page;
         Page<AuctionItem> pageOutput;
 
-        if(description != null){
-            pageOutput = auctionService.getAuctions(description, PageRequest.of(page-1,perPage));
-        } else if (successfulBid != null) {
-            pageOutput = auctionService.getAuctions(successfulBid, PageRequest.of(page-1,perPage));
-        } else {
+        if(description == null){
             pageOutput = auctionService.getAuctions(perPage,page);
+        } else {
+            pageOutput = auctionService.getAuctions(description,successfulBid, PageRequest.of(page-1,perPage));
         }
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count",String.valueOf(pageOutput.getTotalElements()));

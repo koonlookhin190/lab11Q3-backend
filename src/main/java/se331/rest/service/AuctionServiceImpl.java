@@ -34,14 +34,10 @@ public class AuctionServiceImpl implements AuctionService {
 
 
     @Override
-    public Page<AuctionItem> getAuctions(String description, Pageable pageable) {
-        return auctionDao.getAuction(description, pageable);
+    public Page<AuctionItem> getAuctions(String description,Integer successfulBid, Pageable pageable) {
+        return auctionDao.getAuction(description,successfulBid, pageable);
     }
 
-    @Override
-    public Page<AuctionItem> getAuctions(Integer value ,Pageable pageable) {
-        return auctionDao.getAuction(value, pageable);
-    }
     @Override
     @Transactional
     public AuctionItem save(AuctionItem auctionItem) {

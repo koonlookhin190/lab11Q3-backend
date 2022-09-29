@@ -11,9 +11,8 @@ public interface AuctionService {
 
     AuctionItem getAuction(Long id);
 
-    Page<AuctionItem> getAuctions(String description, Pageable pageable);
+    Page<AuctionItem> getAuctions(String description,Integer successfulBid, Pageable pageable);
 
-    Page<AuctionItem> getAuctions(Integer value, Pageable pageable);
 
     AuctionItem save(AuctionItem save);
 }
