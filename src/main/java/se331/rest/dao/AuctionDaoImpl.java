@@ -32,7 +32,7 @@ public class AuctionDaoImpl implements  AuctionDao{
 
     @Override
     public Page<AuctionItem> getAuction(String description, Pageable page) {
-        return auctionRepository.findByDescriptionContainingIgnoreCase(description,page);
+        return auctionRepository.findByDescriptionContainingIgnoreCaseOrTypeContainingIgnoreCase(description,description,page);
     }
 
     @Override

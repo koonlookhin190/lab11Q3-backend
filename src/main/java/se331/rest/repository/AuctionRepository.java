@@ -13,5 +13,5 @@ public interface AuctionRepository extends JpaRepository<AuctionItem,Long> {
 
     Page<AuctionItem> findBySuccessfulBidAmountLessThan(Integer successfulBid, Pageable pageRequest);
 
-    Page<AuctionItem> findByDescriptionContainingIgnoreCase(String description ,Pageable pageRequest);
+    Page<AuctionItem> findByDescriptionContainingIgnoreCaseOrTypeContainingIgnoreCase(String description,String type ,Pageable pageRequest);
 }

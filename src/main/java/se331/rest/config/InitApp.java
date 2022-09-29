@@ -168,11 +168,5 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         auctionItem.getBids().add(bid15);
 
         auctionItem.setSuccessfulBid(bid15);
-        auctionItem = auctionRepository.save(
-                AuctionItem.builder()
-                        .description("Toy")
-                        .type("Lego")
-                        .build()
-        );
     }
 }
